@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta chatset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        * {
+            font-family: -apple-system, "BlinkMacSystemFont", "Helvetica Neue", "Helvetica", "Apple SD Gothic Neo", "Noto Sans KR", "Roboto", "Segoe UI", "Malgun Gothic", sans-serif;
+        }
+        #rr {
+            opacity: 0;
+            width: 100%;
+        }
+        #open {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        window.addEventListener('load', () => {
+            document.querySelector('#rr').load();
+            document.querySelector('#t').innerText = atob(location.search.slice(1));
+            document.querySelector('#rr').addEventListener('loadeddata', () => {
+                document.querySelector('#go').addEventListener('click', () => {
+                    if (true) {
+                        document.querySelector('#go').style.display = 'none';
+                        document.querySelector('#rr').style.opacity = 1;
+                        document.querySelector('#rr').play().then(() => {
+                            document.querySelector('#rr').requestFullscreen();
+                        });
+                        document.querySelector('#txt').innerText = '5초 후 연결...'
+                        setTimeout(() => {
+                            document.querySelector('#open').style.display = 'block';
+                        }, 5000);
+                    }
+                }, { once: true });
+                document.querySelector('#go').innerText = '들어가기';
+                document.querySelector('#go').disabled = false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1 id="t"></h1>
+    <button id="go" disabled>대기 중...</button>
+    <button id="open" onclick="document.querySelector('#rr').requestPictureInPicture().finally(() => { window.open('https://www.google.com'); })">이동하기</button>
+    <p id="txt"></p>
+    <video id="rr" onpause="this.play();">
+        <source src="rickroll.mp4" type="video/mp4">
+        <source src="rickroll.webm" type="video/webm">
+    </video>
+</body>
+</html>
