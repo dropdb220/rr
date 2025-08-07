@@ -23,7 +23,7 @@
         window.addEventListener('load', () => {
             window.onbeforeunload = e => {
                 e.preventDefault();
-                return "Do you want to leave this page?";
+                e.returnValue = true;
             };
             document.querySelector('#t').innerText = b64DecodeUnicode(location.search.slice(1));
             document.querySelector('#rr').load();
