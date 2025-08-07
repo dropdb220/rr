@@ -17,9 +17,12 @@
         }
     </style>
     <script type="text/javascript">
+        function b64DecodeUnicode(str) {
+            return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+        }
         window.addEventListener('load', () => {
+            document.querySelector('#t').innerText = b64DecodeUnicode(location.search.slice(1));
             document.querySelector('#rr').load();
-            document.querySelector('#t').innerText = atob(location.search.slice(1));
             document.querySelector('#rr').addEventListener('loadeddata', () => {
                 document.querySelector('#go').addEventListener('click', () => {
                     if (true) {
