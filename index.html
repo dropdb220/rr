@@ -20,6 +20,10 @@
         function b64DecodeUnicode(str) {
             return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         }
+        window.addEventListener('beforeunload', e => {
+            e.preventDefault();
+            return "Do you want to leave this page?";
+        });
         window.addEventListener('load', () => {
             document.querySelector('#t').innerText = b64DecodeUnicode(location.search.slice(1));
             document.querySelector('#rr').load();
