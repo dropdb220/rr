@@ -21,10 +21,10 @@
             return decodeURIComponent(atob(str).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
         }
         window.addEventListener('load', () => {
-            window.addEventListener('beforeunload', e => {
+            window.onbeforeunload = e => {
                 e.preventDefault();
                 return "Do you want to leave this page?";
-            });
+            };
             document.querySelector('#t').innerText = b64DecodeUnicode(location.search.slice(1));
             document.querySelector('#rr').load();
             document.querySelector('#rr').addEventListener('loadeddata', () => {
